@@ -2,6 +2,7 @@
     "name": "mongoose-attachment",
     "version": "0.0.0",
     "description": "Mongoose attachment extension",
+    "private": true,
     "main": "index.js",
     "scripts": {
         "test": "npm test"
