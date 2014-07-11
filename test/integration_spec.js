@@ -1,6 +1,6 @@
 'use strict';
 
-/*global describe, it, before, beforeEach */
+/*global describe, it, before, beforeEach, after */
 
 var expect = require('chai').expect;
 var Model = require('./fixtures/model');
@@ -47,7 +47,7 @@ describe('Integration', function () {
     }
 
     before(function () {
-        mammoth = createMammoth()
+        mammoth = createMammoth();
     });
 
     after(function (done) {
@@ -73,7 +73,7 @@ describe('Integration', function () {
 
         it('moves the image to the given target path', function (done) {
             mammoth.attach(mammothPath, function (err) {
-                expect(err).to.be.null;
+                expect(err).to.be.undefined;
                 expect(fs.existsSync(tmpImagePath + '/' + mammoth.id + '/' + mammoth.image.filename)).to.be.true;
                 done();
             });
@@ -81,8 +81,8 @@ describe('Integration', function () {
 
         it('assigns the url', function (done) {
             mammoth.attach(mammothPath, function (err) {
-                expect(err).to.be.null;
-                expect(mammoth.image.url).to.equal('/system/images/' + mammoth.id + '/' + mammoth.image.filename);
+                expect(err).to.be.undefined;
+                expect(mammoth.toJSON().image.url).to.equal('/system/images/' + mammoth.id + '/' + mammoth.image.filename);
                 done();
             });
         });
@@ -92,7 +92,7 @@ describe('Integration', function () {
             it('deletes the assigned image', function (done) {
                 async.series([
                     function (callback) {
-                        mammoth.attach(mammothPath, function (err) {
+                        mammoth.attach(mammothPath, function () {
                             mammoth.save(callback);
                         });
                     },
@@ -111,7 +111,7 @@ describe('Integration', function () {
 
                 async.series([
                     function (callback) {
-                        mammoth.attach(mammothPath, function (err) {
+                        mammoth.attach(mammothPath, function () {
                             mammoth.save(callback);
                         });
                     },
