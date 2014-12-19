@@ -20,6 +20,8 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "cloudinary": "^1.1.0",
+    "mime-types": "^2.0.4",
     "mongoose": "^3.8.12",
     "mv": "^2.0.1",
     "rimraf": "^2.2.8"
