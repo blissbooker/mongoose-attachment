@@ -36,9 +36,9 @@ describe('Cloudinary Strategy', function () {
     var mammoth;
 
     var fixtures = path.join(__dirname, '..', 'fixtures');
-    var resources = path.join(fixtures, 'resources');
+    var images = path.join(fixtures, 'images');
 
-    var mammothSource = fs.realpathSync(resources + '/mammoth.png');
+    var mammothSource = fs.realpathSync(images + '/mammoth.jpg');
 
 
     before(function () {
@@ -46,9 +46,9 @@ describe('Cloudinary Strategy', function () {
         Model = require('../fixtures/cloudinary')(cloudinary);
         mammoth = new Model({
             image: {
-                filename: 'mammoth.png',
+                filename: 'mammoth.jpg',
                 fileSize: 232030,
-                contentType: 'image/png',
+                contentType: 'image/jpeg',
             }
         });
     });
@@ -118,7 +118,7 @@ describe('Cloudinary Strategy', function () {
             mammoth.attach(mammothSource, function () {
                 mammoth.toJSON();
                 expect(cloudinary.url).to.have.been.calledWithExactly(mammoth.id, {
-                    format: 'png',
+                    format: 'jpeg',
                     secure: true
                 });
                 done();

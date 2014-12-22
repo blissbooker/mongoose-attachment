@@ -15,27 +15,28 @@ describe('Filesystem Strategy', function () {
     var mammoth;
 
     var fixtures = path.join(__dirname, '..', 'fixtures');
-    var resources = path.join(fixtures, 'resources');
+    var images = path.join(fixtures, 'images');
+
     var tmp = path.join(fixtures, '.tmp');
-    var assets = path.join(tmp, 'assets');
+    var resources = path.join(tmp, 'resources');
 
-    var mammothFixture = fs.realpathSync(resources + '/mammoth.png');
-    var mammothSource = mammothFixture + '-tmp.png';
+    var mammothFixture = fs.realpathSync(images + '/mammoth.jpg');
+    var mammothSource = mammothFixture + '-tmp.jpg';
 
-    var spongebobFixture = fs.realpathSync(resources + '/spongebob.png');
+    var spongebobFixture = fs.realpathSync(images + '/spongebob.png');
     var spongebobSource = spongebobFixture + '-tmp.png';
 
 
-    function assetPath(asset) {
-        return assets + '/' + asset.id + '.png';
+    function assetPath(asset, ext) {
+        return resources + '/' + asset.id + '.' + ext;
     }
 
     function createMammoth() {
         return new Model({
             image: {
-                filename: 'mammoth.png',
+                filename: 'mammoth.jpg',
                 fileSize: 232030,
-                contentType: 'image/png',
+                contentType: 'image/jpeg',
             }
         });
     }
@@ -67,14 +68,14 @@ describe('Filesystem Strategy', function () {
 
     it('moves the image to target path', function (done) {
         mammoth.attach(mammothSource, function () {
-            expect(fs.existsSync(assetPath(mammoth))).to.be.true;
+            expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
             done();
         });
     });
 
     it('assigns the url', function (done) {
         mammoth.attach(mammothSource, function () {
-            expect(mammoth.toJSON().image.url).to.equal('/system/assets/' + mammoth.id + '.png');
+            expect(mammoth.toJSON().image.url).to.equal('/system/resources/' + mammoth.id + '.jpeg');
             done();
         });
     });
@@ -85,13 +86,13 @@ describe('Filesystem Strategy', function () {
             async.series([
                 function (callback) {
                     mammoth.attach(mammothSource, function () {
-                        expect(fs.existsSync(assetPath(mammoth))).to.be.true;
+                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
                         mammoth.save(callback);
                     });
                 },
                 function (callback) {
                     mammoth.remove(function (err) {
-                        expect(fs.existsSync(assetPath(mammoth))).to.be.false;
+                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.false;
                         callback(err);
                     });
                 }
@@ -111,13 +112,13 @@ describe('Filesystem Strategy', function () {
                 function (callback) {
                     fs.createReadStream(spongebobFixture).pipe(fs.createWriteStream(spongebobSource));
                     spongebob.attach(spongebobSource, function () {
-                        expect(fs.existsSync(assetPath(mammoth))).to.be.true;
+                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
                         spongebob.save(callback);
                     });
                 },
                 function (callback) {
                     mammoth.remove(function (err) {
-                        expect(fs.existsSync(assetPath(spongebob))).to.be.true;
+                        expect(fs.existsSync(assetPath(spongebob, 'png'))).to.be.true;
                         callback(err);
                     });
                 }
