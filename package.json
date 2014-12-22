@@ -1,6 +1,6 @@
 {
   "name": "mongoose-attachment",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Mongoose attachment extension",
   "private": true,
   "main": "index.js",
@@ -17,7 +17,9 @@
   ],
   "author": "Steffen Leistner <sleistner@gmail.com>",
   "contributors": [
-    "Sascha Teske <sascha.teske@gmail.com>"
+    "Sascha Teske <sascha.teske@gmail.com>",
+    "Rui Quelhas <rui@alpha-iv.com>",
+    "Filipe Pinheiro <filipe@alpha-iv.com>"
   ],
   "license": "ISC",
   "dependencies": {
