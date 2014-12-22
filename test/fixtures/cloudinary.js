@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 
 var options = {
     strategy: 'cloudinary',
+    attribute: 'image',
     config: {
         //jshint camelcase:false
-        attribute: 'image',
         cloud_name: 'test',
         api_key: '123',
         api_secret: '123',

@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 
 var options = {
     strategy: 'filesystem',
+    attribute: 'image',
     config: {
-        attribute: 'image',
         path: __dirname + '/.tmp',
         url: '/system'
     }
