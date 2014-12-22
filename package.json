@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/**/*_spec.js"
+    "test": "mocha test --recursive",
     "validate": "jscs . --config=./.jscsrc --reporter=inline"
   },
   "repository": {
@@ -32,9 +32,13 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
-    "chai": "^1.9.1",
+    "chai": "^1.10.0",
     "jscs": "^1.8.1",
+    "jshint": "^2.5.11",
     "lodash": "^2.4.1",
-    "mocha": "^1.20.1"
+    "mocha": "^1.20.1",
+    "precommit-hook": "^1.0.7",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
   }
 }
