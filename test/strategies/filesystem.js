@@ -27,8 +27,8 @@ describe('Filesystem Strategy', function () {
     var spongebobSource = spongebobFixture + '-tmp.png';
 
 
-    function assetPath(asset, ext) {
-        return resources + '/' + asset.id + '.' + ext;
+    function resourcePath(model, ext) {
+        return resources + '/' + model.id + '.' + ext;
     }
 
     function createMammoth() {
@@ -68,7 +68,7 @@ describe('Filesystem Strategy', function () {
 
     it('moves the image to target path', function (done) {
         mammoth.attach(mammothSource, function () {
-            expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
+            expect(fs.existsSync(resourcePath(mammoth, 'jpeg'))).to.be.true;
             done();
         });
     });
@@ -86,13 +86,13 @@ describe('Filesystem Strategy', function () {
             async.series([
                 function (callback) {
                     mammoth.attach(mammothSource, function () {
-                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
+                        expect(fs.existsSync(resourcePath(mammoth, 'jpeg'))).to.be.true;
                         mammoth.save(callback);
                     });
                 },
                 function (callback) {
                     mammoth.remove(function (err) {
-                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.false;
+                        expect(fs.existsSync(resourcePath(mammoth, 'jpeg'))).to.be.false;
                         callback(err);
                     });
                 }
@@ -112,13 +112,13 @@ describe('Filesystem Strategy', function () {
                 function (callback) {
                     fs.createReadStream(spongebobFixture).pipe(fs.createWriteStream(spongebobSource));
                     spongebob.attach(spongebobSource, function () {
-                        expect(fs.existsSync(assetPath(mammoth, 'jpeg'))).to.be.true;
+                        expect(fs.existsSync(resourcePath(mammoth, 'jpeg'))).to.be.true;
                         spongebob.save(callback);
                     });
                 },
                 function (callback) {
                     mammoth.remove(function (err) {
-                        expect(fs.existsSync(assetPath(spongebob, 'png'))).to.be.true;
+                        expect(fs.existsSync(resourcePath(spongebob, 'png'))).to.be.true;
                         callback(err);
                     });
                 }
