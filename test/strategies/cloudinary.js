@@ -119,7 +119,9 @@ describe('Cloudinary Strategy', function () {
                 mammoth.toJSON();
                 expect(cloudinary.url).to.have.been.calledWithExactly(mammoth.id, {
                     format: 'jpeg',
-                    secure: true
+                    secure: true,
+                    cdn_subdomain: true,
+                    secure_cdn_subdomain: true
                 });
                 done();
             });
