@@ -15,13 +15,11 @@ var attachment = require('mongoose-attachment');
 var Asset = new mongoose.Schema({});
 
 Asset.plugin(attachment, {
-    {
-        strategy: 'filesystem',
-        attribute: 'image',
-        config: {
-            path: '/tmp/system',
-            url: '/system'
-        }
+    strategy: 'filesystem',
+    attribute: 'image',
+    config: {
+        path: '/tmp/system',
+        url: '/system'
     }
 });
 
