@@ -48,7 +48,7 @@ asset.attach(params.path, function (err) {
     asset.save();
 });
 
-asset.toJSON()
+asset.toJSON();
 ```
 
 ```json
